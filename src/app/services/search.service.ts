@@ -93,7 +93,10 @@ export class SearchService {
   }
 
   set searchText(text: string) {
-    this.searchTextSubject.next(text); // next -> 發送 or 更新新值到所有訂閱該 subject 的觀察者
+    if(this.searchTextSubject.value !== text) {
+      this.searchTextSubject.next(text); // next -> 發送 or 更新新值到所有訂閱該 subject 的觀察者
+      this.pageIndexSubject.next(0); // reset page
+    }
     // this._updateCurrentSearch();
   }
 

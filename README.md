@@ -61,7 +61,7 @@ In [src/app/app.component.ts](src/app/app.component.ts) needs to handle:
   - [ ] (Optional) Allow changing page size
   - [ ] Make API calls to fetch paginated data when page changes
   - [ ] Cancel pending requests when switching pages rapidly
-  - [ ] Should be reset to first page if new search text is submitted
+  - [V] Should be reset to first page if new search text is submitted
 - [ ] (Optional) URL parameter management
   - [ ] Preserve search parameters in URL
   - [ ] Load search from URL parameters on page load/refresh
