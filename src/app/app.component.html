@@ -18,7 +18,7 @@
     </mat-form-field>
   </form>
   <mat-list role="list" class="flex-grow min-h-0 overflow-y-auto">
-    <ng-container *ngIf="searchResults$ | async as results">
+    <ng-container *ngIf="(searchResults$ | async) as results">
       <ng-container *ngIf="results.docs.length > 0; else noResults">
         <mat-list-item
           role="listitem"
