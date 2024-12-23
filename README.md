@@ -58,7 +58,7 @@ In [src/app/app.component.ts](src/app/app.component.ts) needs to handle:
 - [V] Display search results on the page
 - [ ] Pagination controls
   - [V] Display total number of results
-  - [ ] (Optional) Allow changing page size
+  - [X] (Optional) Allow changing page size
   - [V] Make API calls to fetch paginated data when page changes
   - [/] Cancel pending requests when switching pages rapidly
   - [V] Should be reset to first page if new search text is submitted

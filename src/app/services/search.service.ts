@@ -1,4 +1,4 @@
-import { Injectable, InjectionToken } from '@angular/core';
+import { Inject, Injectable, InjectionToken } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
@@ -60,7 +60,13 @@ export class SearchService {
   pageIndex$ = this.pageIndexSubject.asObservable();
   currentSearch$ = this.currentSearchSubject.asObservable();
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router, 
+    @Inject(SEARCH_CONFIG) private config:SearchConfig
+  ) {
+    if (this.config.defaultPageSize) {
+      this.pageSizeSubject.next(this.config.defaultPageSize)
+    };
     this._initFromUrl();
   }
 
@@ -68,7 +74,7 @@ export class SearchService {
   private _initFromUrl() {
     const params = new URLSearchParams(window.location.search);
     const searchText = params.get('q') || '';
-    const pageSize = parseInt(params.get('size') || '10', 10);
+    const pageSize = parseInt(params.get('limit') || `${this.config.defaultPageSize}`, 10);
     const page = parseInt(params.get('page') || '1', 10) - 1;
 
     this.searchTextSubject.next(searchText);
@@ -85,7 +91,7 @@ export class SearchService {
     this.router.navigate([], {
       queryParams: {
         q: searchText, 
-        size: pageSize, 
+        limit: pageSize, 
         page
       },
       queryParamsHandling: 'merge',
@@ -102,6 +108,11 @@ export class SearchService {
 
   set page(page: number) {
     this.pageIndexSubject.next(page - 1);
+    this._updateCurrentSearch();
+  }
+
+  set pageSize(pageSize: number) {
+    this.pageSizeSubject.next(pageSize);
     this._updateCurrentSearch();
   }
 

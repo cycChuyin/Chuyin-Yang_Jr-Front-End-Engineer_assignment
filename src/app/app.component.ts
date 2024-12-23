@@ -8,6 +8,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 import { distinctUntilChanged, map, Observable, of, shareReplay, switchMap } from 'rxjs';
 import { CurrentSearch, SearchService } from './services/search.service';
 
@@ -33,6 +35,8 @@ interface SearchResult {
     MatButtonModule,
     MatListModule,
     MatPaginatorModule,
+    MatSelectModule,
+    MatOptionModule
   ],
   // BONUS: Use DI to update the config of SearchService to update page size
 })
@@ -61,17 +65,23 @@ export class AppComponent {
     this.searchService.searchText = (event.target as HTMLInputElement).value;
   }
 
-  onPageChange(pageIndex: number) {
+  onPageChange(pageIndex: number, pageSize: number) {
+    // console.log("~~~onPageChange~~~", { pageIndex, pageSize })
     this.searchService.page = pageIndex + 1;
+
+    // bug: this.searchService.pageSize always undefined
+    // if (this.searchService.pageSize !== pageSize) {
+    //   this.searchService.pageSize = pageSize;
+    //   this.searchService.page = 1
+    // } else {
+    //   this.searchService.page = pageIndex + 1;
+    // }
   }
 
   trackByTitle(index: number, item: any) {
     return item.title;
   }
 
-  // onPageSizeChange(pageSize: number) {
-  //   this.searchService.pageSize$ = pageSize;
-  // }
 
   searchBooks(currentSearch: CurrentSearch): Observable<SearchResult> {
     const { searchText, pageSize, page } = currentSearch;
