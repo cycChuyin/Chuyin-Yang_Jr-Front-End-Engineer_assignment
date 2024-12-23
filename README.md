@@ -52,16 +52,16 @@ In [src/app/app.component.ts](src/app/app.component.ts) needs to handle:
 
 ## Checklist
 
-- [V] Search input field accepts user's text input
-- [V] Search button triggers API request when clicked
-  - [V] Prevent API calls when search text is empty
-- [V] Display search results on the page
+- [X] Search input field accepts user's text input
+- [X] Search button triggers API request when clicked
+  - [X] Prevent API calls when search text is empty
+- [X] Display search results on the page
 - [ ] Pagination controls
-  - [V] Display total number of results
-  - [X] (Optional) Allow changing page size
-  - [V] Make API calls to fetch paginated data when page changes
-  - [/] Cancel pending requests when switching pages rapidly
-  - [V] Should be reset to first page if new search text is submitted
+  - [X] Display total number of results
+  - [ ] (Optional) Allow changing page size
+  - [X] Make API calls to fetch paginated data when page changes
+  - [X] Cancel pending requests when switching pages rapidly
+  - [X] Should be reset to first page if new search text is submitted
 - [ ] (Optional) URL parameter management
   - [ ] Preserve search parameters in URL
   - [ ] Load search from URL parameters on page load/refresh
